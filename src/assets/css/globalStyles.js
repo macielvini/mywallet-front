@@ -46,13 +46,20 @@ table {
 }
 
 /* MY STYLES */
-body{
+* {
+	box-sizing: border-box;
+}
+
+body {
 	background-color:  #8C11BE;
 	width: 100%;
 
 	font-family: 'Raleway', sans-serif;
 }
 
+a:hover {
+	cursor: pointer;
+}
 `;
 
 export default GlobalStyle;
