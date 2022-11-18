@@ -8,9 +8,6 @@ export default function App() {
     <>
       <BrowserRouter>
         <GlobalStyle />
-        {/* <Routes>
-          <Route path="/" element={<SignIn />} />
-        </Routes> */}
         <AuthRoutes />
       </BrowserRouter>
     </>

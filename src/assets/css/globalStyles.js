@@ -60,6 +60,10 @@ body {
 a:hover {
 	cursor: pointer;
 }
+
+iframe {
+	pointer-events:none;
+}
 `;
 
 export default GlobalStyle;

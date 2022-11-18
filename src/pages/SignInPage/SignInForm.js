@@ -1,13 +1,9 @@
 import styled from "styled-components";
 
-export default function SignInForm() {
+export default function SignInForm(props) {
   return (
     <>
-      <StyledForm>
-        <input placeholder="E-mail" type="text" />
-        <input placeholder="Senha" type="password" />
-        <button type="submit">Entrar</button>
-      </StyledForm>
+      <StyledForm>{props.children}</StyledForm>
     </>
   );
 }
