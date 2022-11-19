@@ -12,7 +12,7 @@ const statements = [
     date: "08/10",
     description: "donnut",
     amount: 10,
-    transaction: "out",
+    type: "out",
   },
   {
     _id: "6376ea64ec6212b427f05e05",
@@ -20,7 +20,7 @@ const statements = [
     date: "10/09",
     description: "ice cream",
     amount: 1.9,
-    transaction: "out",
+    type: "out",
   },
   {
     _id: "6376ea64ec6212b427f5e05",
@@ -28,7 +28,7 @@ const statements = [
     date: "10/09",
     description: "payment",
     amount: 1000,
-    transaction: "in",
+    type: "in",
   },
 ];
 
@@ -37,10 +37,11 @@ export default function Home() {
 
   useEffect(() => {
     statements.forEach((s) =>
-      s.transaction === "in"
+      s.type === "in"
         ? setBalance(balance + s.amount)
         : setBalance(balance - s.amount)
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -58,7 +59,7 @@ export default function Home() {
               date={item.date}
               description={item.description}
               amount={item.amount}
-              type={item.transaction}
+              type={item.type}
             />
           ))}
         </Statement>

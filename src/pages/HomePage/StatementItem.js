@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-export default function Item({ key, date, description, amount, type }) {
+export default function Item({ date, description, amount, type }) {
   return (
-    <BalanceItem key={key} type={type}>
+    <BalanceItem type={type}>
       <p>
         <span className="date">{date}</span>
         {description}
