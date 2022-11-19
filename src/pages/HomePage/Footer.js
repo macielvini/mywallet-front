@@ -7,13 +7,13 @@ export default function Footer() {
   return (
     <>
       <StyledFooter>
-        <Link to={"/types/in"}>
+        <Link to={"/register/in"}>
           <div>
             <img src={plusIcon} alt="" />
             <p>Nova entrada</p>
           </div>
         </Link>
-        <Link to={"/types/out"}>
+        <Link to={"/register/out"}>
           <div>
             <img src={minusIcon} alt="" />
             <p>Nova saída</p>

@@ -17,3 +17,7 @@ export function signIn(body) {
 export function getUserStatement() {
   return api.get("/statement");
 }
+
+export function addRecordToStatement(body) {
+  return api.post("/statement", body);
+}
