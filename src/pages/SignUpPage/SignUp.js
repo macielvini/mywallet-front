@@ -1,11 +1,13 @@
 import Logo from "../../components/Logo";
 import Form from "../../components/Form";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { signUp } from "../../api/api";
 
 export default function SignUp() {
+  const navigate = useNavigate();
+
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -19,10 +21,14 @@ export default function SignUp() {
 
   function formSignUp(e) {
     e.preventDefault();
-
+    console.log("entrou");
     const body = form;
+    console.log(form);
     signUp(body)
-      .then((res) => console.log(res.data))
+      .then((res) => {
+        console.log(res.data);
+        navigate("/");
+      })
       .catch((err) => console.log(err.response.data));
   }
 
