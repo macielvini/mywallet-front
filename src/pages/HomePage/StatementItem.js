@@ -8,7 +8,7 @@ export default function Item({ date, description, amount, type }) {
         {description}
       </p>
       <p className="value">
-        {amount.toLocaleString("pt-br", {
+        {parseFloat(amount).toLocaleString("pt-br", {
           style: "currency",
           currency: "BRL",
         })}
