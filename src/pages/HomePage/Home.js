@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import logoutIcon from "../../assets/images/logout.svg";
-import plusIcon from "../../assets/images/plus.svg";
-import minusIcon from "../../assets/images/minus.svg";
 import PageTitle from "../../components/PageTitle";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import Footer from "./Footer";
+import Item from "./StatementItem";
 
 const statements = [
   {
@@ -22,9 +22,27 @@ const statements = [
     amount: 1.9,
     transaction: "out",
   },
+  {
+    _id: "6376ea64ec6212b427f5e05",
+    timestamp: 166873763688,
+    date: "10/09",
+    description: "payment",
+    amount: 1000,
+    transaction: "in",
+  },
 ];
 
 export default function Home() {
+  const [balance, setBalance] = useState(0);
+
+  useEffect(() => {
+    statements.forEach((s) =>
+      s.transaction === "in"
+        ? setBalance(balance + s.amount)
+        : setBalance(balance - s.amount)
+    );
+  }, []);
+
   return (
     <Container>
       <header>
@@ -35,40 +53,26 @@ export default function Home() {
       <StatementContainer>
         <Statement>
           {statements.map((item) => (
-            <BalanceItem key={item._id}>
-              <p>
-                <span className="date">{item.date}</span>
-                {item.description}
-              </p>
-              <p className="value">
-                {item.amount.toLocaleString("pt-br", {
-                  style: "currency",
-                  currency: "BRL",
-                })}
-              </p>
-            </BalanceItem>
+            <Item
+              key={item._id}
+              date={item.date}
+              description={item.description}
+              amount={item.amount}
+              type={item.transaction}
+            />
           ))}
         </Statement>
-        <Balance>
+        <Balance balance={balance}>
           <p className="saldo">SALDO</p>
-          <p className="total">2500.90</p>
+          <p className="total">
+            {balance.toLocaleString("pt-br", {
+              style: "currency",
+              currency: "BRL",
+            })}
+          </p>
         </Balance>
       </StatementContainer>
-
-      <Footer>
-        <Link to={"/in"}>
-          <div>
-            <img src={plusIcon} alt="" />
-            <p>Nova entrada</p>
-          </div>
-        </Link>
-        <Link to={"/out"}>
-          <div>
-            <img src={minusIcon} alt="" />
-            <p>Nova saída</p>
-          </div>
-        </Link>
-      </Footer>
+      <Footer />
     </Container>
   );
 }
@@ -111,54 +115,8 @@ const Balance = styled.ul`
   border-radius: 0 0 5px 5px;
   padding: 0 15px;
   font-weight: 700;
-
   .total {
-    color: #03ac00;
-  }
-`;
-
-const BalanceItem = styled.li`
-  display: flex;
-  justify-content: space-between;
-
-  .date {
-    color: #c6c6c6;
-    margin-right: 10px;
-  }
-
-  .value {
-    color: ${(props) => (props.type === "in" ? "#03AC00" : "#C70000")};
-  }
-`;
-
-const Footer = styled.footer`
-  display: flex;
-  justify-content: space-between;
-  gap: 15px;
-
-  div {
-    height: 114px;
-
-    background-color: #a328d6;
-
-    border-radius: 5px;
-    padding: 10px;
-
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    justify-content: space-between;
-
-    img {
-      height: 24px;
-    }
-    p {
-      font-weight: 700;
-      font-size: 17px;
-
-      color: #ffffff;
-      width: 32px;
-    }
+    color: ${(props) => (props.balance < 0 ? "#C70000" : "#03ac00")};
   }
 `;
 
@@ -179,11 +137,6 @@ const Container = styled.div`
     flex-direction: column;
     justify-content: space-between;
     gap: 15px;
-  }
-
-  a {
-    width: 100%;
-    text-decoration: none;
   }
 
   header {
