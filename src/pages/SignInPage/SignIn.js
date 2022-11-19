@@ -1,18 +1,18 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Logo from "../../components/Logo";
-import SignInForm from "./SignInForm";
+import Form from "../../components/Form";
 
 export default function SignIn() {
   return (
     <>
       <Container>
         <Logo />
-        <SignInForm>
+        <Form>
           <input placeholder="E-mail" type="text" />
           <input placeholder="Senha" type="password" />
           <button type="submit">Entrar</button>
-        </SignInForm>
+        </Form>
         <Link to={"/sign-up"}>Primeira vez? Cadastre-se!</Link>
       </Container>
     </>
