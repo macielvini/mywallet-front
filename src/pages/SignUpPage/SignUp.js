@@ -25,7 +25,6 @@ export default function SignUp() {
     console.log(form);
     signUp(body)
       .then((res) => {
-        console.log(res.data);
         navigate("/");
       })
       .catch((err) => console.log(err.response.data));

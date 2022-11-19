@@ -1,4 +1,4 @@
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Logo from "../../components/Logo";
 import Form from "../../components/Form";
@@ -23,6 +23,8 @@ export default function SignIn() {
     signIn(body)
       .then((res) => {
         navigate("/home");
+        localStorage.setItem("name", res.data.name);
+        localStorage.setItem("token", res.data.token);
       })
       .catch((err) => console.log(err.response.data));
   }
