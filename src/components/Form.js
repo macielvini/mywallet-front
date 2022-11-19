@@ -15,7 +15,7 @@ const StyledForm = styled.form`
   gap: 13px;
 
   input {
-    width: 326px;
+    width: 100%;
     height: 58px;
     left: 25px;
     top: 233px;
@@ -42,13 +42,13 @@ const StyledForm = styled.form`
   }
 
   button {
+    width: 100%;
+    height: 46px;
+
     font-weight: 700;
     font-size: 20px;
 
     color: #ffffff;
-
-    width: 326px;
-    height: 46px;
 
     background: #a328d6;
     border-radius: 5px;

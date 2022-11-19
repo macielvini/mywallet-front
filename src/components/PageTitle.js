@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
-export default function PageTitle({ name }) {
+export default function PageTitle({ text }) {
   return (
     <>
-      <StyledTitle>Olá, {name}</StyledTitle>
+      <StyledTitle>{text}</StyledTitle>
     </>
   );
 }

@@ -26,6 +26,7 @@ const Container = styled.div`
   height: 100vh;
 
   text-align: center;
+  padding: 25px;
 
   display: flex;
   justify-content: center;

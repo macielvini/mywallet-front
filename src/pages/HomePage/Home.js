@@ -3,6 +3,7 @@ import logoutIcon from "../../assets/images/logout.svg";
 import plusIcon from "../../assets/images/plus.svg";
 import minusIcon from "../../assets/images/minus.svg";
 import PageTitle from "../../components/PageTitle";
+import { Link } from "react-router-dom";
 
 const statements = [
   {
@@ -27,14 +28,14 @@ export default function Home() {
   return (
     <Container>
       <header>
-        <PageTitle name="Fulano" />
+        <PageTitle text={`Ola ${"Fulano"}`} />
         <img src={logoutIcon} alt="" />
       </header>
 
       <StatementContainer>
         <Statement>
           {statements.map((item) => (
-            <BalanceItem>
+            <BalanceItem key={item._id}>
               <p>
                 <span className="date">{item.date}</span>
                 {item.description}
@@ -55,14 +56,18 @@ export default function Home() {
       </StatementContainer>
 
       <Footer>
-        <div>
-          <img src={plusIcon} alt="" />
-          <p>Nova entrada</p>
-        </div>
-        <div>
-          <img src={minusIcon} alt="" />
-          <p>Nova saída</p>
-        </div>
+        <Link to={"/in"}>
+          <div>
+            <img src={plusIcon} alt="" />
+            <p>Nova entrada</p>
+          </div>
+        </Link>
+        <Link to={"/out"}>
+          <div>
+            <img src={minusIcon} alt="" />
+            <p>Nova saída</p>
+          </div>
+        </Link>
       </Footer>
     </Container>
   );
@@ -132,7 +137,6 @@ const Footer = styled.footer`
   gap: 15px;
 
   div {
-    width: 100%;
     height: 114px;
 
     background-color: #a328d6;
@@ -178,10 +182,8 @@ const Container = styled.div`
   }
 
   a {
+    width: 100%;
     text-decoration: none;
-    color: #ffffff;
-    font-weight: 700;
-    font-size: 15px;
   }
 
   header {
