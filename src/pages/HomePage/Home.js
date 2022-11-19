@@ -13,22 +13,24 @@ export default function Home() {
 
   useEffect(() => {
     getStatement();
-    sumStatement();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function getStatement() {
     getUserStatement()
-      .then((res) => setStatement(res.data))
+      .then((res) => {
+        setStatement(res.data);
+        setBalance(sumStatement(res.data));
+      })
       .catch((error) => console.log(error));
   }
 
-  function sumStatement() {
-    statement.forEach((s) =>
-      s.type === "in"
-        ? setBalance(balance + s.amount)
-        : setBalance(balance - s.amount)
+  function sumStatement(arr) {
+    let sum = 0;
+    arr.forEach(({ type, amount }) =>
+      type === "in" ? (sum += parseFloat(amount)) : (sum -= parseFloat(amount))
     );
+    return sum;
   }
 
   return (
