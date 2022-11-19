@@ -6,3 +6,7 @@ export const api = axios.create({ baseURL: BASE_URL });
 export function signUp(body) {
   return api.post("/sign-up", body);
 }
+
+export function signIn(body) {
+  return api.post("/sign-in", body);
+}

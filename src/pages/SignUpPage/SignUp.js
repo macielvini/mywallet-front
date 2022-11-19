@@ -21,7 +21,6 @@ export default function SignUp() {
 
   function formSignUp(e) {
     e.preventDefault();
-    console.log("entrou");
     const body = form;
     console.log(form);
     signUp(body)
