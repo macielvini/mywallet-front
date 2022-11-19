@@ -4,64 +4,53 @@ import PageTitle from "../../components/PageTitle";
 import { useEffect, useState } from "react";
 import Footer from "./Footer";
 import Item from "./StatementItem";
-
-const statements = [
-  {
-    _id: "6376ec49266d69e48c50b689",
-    timestamp: 1668738121973,
-    date: "08/10",
-    description: "donnut",
-    amount: 10,
-    type: "out",
-  },
-  {
-    _id: "6376ea64ec6212b427f05e05",
-    timestamp: 1668737636588,
-    date: "10/09",
-    description: "ice cream",
-    amount: 1.9,
-    type: "out",
-  },
-  {
-    _id: "6376ea64ec6212b427f5e05",
-    timestamp: 166873763688,
-    date: "10/09",
-    description: "payment",
-    amount: 1000,
-    type: "in",
-  },
-];
+import { getUserStatement } from "../../api/api";
 
 export default function Home() {
   const [balance, setBalance] = useState(0);
+  const [statement, setStatement] = useState([]);
+  const username = localStorage.getItem("name");
 
   useEffect(() => {
-    statements.forEach((s) =>
+    getStatement();
+    sumStatement();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  function getStatement() {
+    getUserStatement()
+      .then((res) => setStatement(res.data))
+      .catch((error) => console.log(error));
+  }
+
+  function sumStatement() {
+    statement.forEach((s) =>
       s.type === "in"
         ? setBalance(balance + s.amount)
         : setBalance(balance - s.amount)
     );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }
 
   return (
     <Container>
       <header>
-        <PageTitle text={`Ola ${"Fulano"}`} />
+        <PageTitle text={`Olá, ${username}`} />
         <img src={logoutIcon} alt="" />
       </header>
 
       <StatementContainer>
         <Statement>
-          {statements.map((item) => (
-            <Item
-              key={item._id}
-              date={item.date}
-              description={item.description}
-              amount={item.amount}
-              type={item.type}
-            />
-          ))}
+          {statement.length === 0
+            ? "Nenhum registro ainda"
+            : statement.map((item) => (
+                <Item
+                  key={item._id}
+                  date={item.date}
+                  description={item.description}
+                  amount={item.amount}
+                  type={item.type}
+                />
+              ))}
         </Statement>
         <Balance balance={balance}>
           <p className="saldo">SALDO</p>

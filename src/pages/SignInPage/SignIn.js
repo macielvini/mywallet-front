@@ -22,9 +22,9 @@ export default function SignIn() {
     const body = form;
     signIn(body)
       .then((res) => {
-        navigate("/home");
         localStorage.setItem("name", res.data.name);
         localStorage.setItem("token", res.data.token);
+        navigate("/home");
       })
       .catch((err) => console.log(err.response.data));
   }
