@@ -30,15 +30,12 @@ export default function Transaction() {
   function addItem(e) {
     e.preventDefault();
 
-    if (!typeIsValid) window.alert("Erro em tipo, volte para Home");
-
     const body = {
       ...form,
       type: type,
     };
     addRecordToStatement(body)
       .then(() => {
-        console.log("sucesso");
         navigate("/home");
       })
       .catch((err) => console.log(err));

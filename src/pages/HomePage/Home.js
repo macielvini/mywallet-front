@@ -9,7 +9,7 @@ import { getUserStatement } from "../../api/api";
 export default function Home() {
   const [balance, setBalance] = useState(0);
   const [statement, setStatement] = useState([]);
-  const username = localStorage.getItem("name");
+  const firstName = localStorage.getItem("name").split(" ")[0];
 
   useEffect(() => {
     getStatement();
@@ -36,7 +36,7 @@ export default function Home() {
   return (
     <Container>
       <header>
-        <PageTitle text={`Olá, ${username}`} />
+        <PageTitle text={`Olá, ${firstName}`} />
         <img src={logoutIcon} alt="" />
       </header>
 
