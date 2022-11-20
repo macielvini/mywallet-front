@@ -5,8 +5,10 @@ import { useEffect, useState } from "react";
 import Footer from "./Footer";
 import Item from "./StatementItem";
 import { getUserStatement } from "../../api/api";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
+  const navigate = useNavigate();
   const [balance, setBalance] = useState(0);
   const [statement, setStatement] = useState([]);
   const firstName = localStorage.getItem("name").split(" ")[0];
@@ -16,7 +18,7 @@ export default function Home() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  function getStatement() {
+  async function getStatement() {
     getUserStatement()
       .then((res) => {
         setStatement(res.data);
@@ -33,11 +35,17 @@ export default function Home() {
     return sum;
   }
 
+  function logOut() {
+    localStorage.setItem("token", "");
+    localStorage.setItem("name", "");
+    navigate("/");
+  }
+
   return (
     <Container>
       <header>
         <PageTitle text={`Olá, ${firstName}`} />
-        <img src={logoutIcon} alt="" />
+        <img src={logoutIcon} alt="" onClick={logOut} />
       </header>
 
       <StatementContainer>
@@ -78,7 +86,7 @@ const StatementContainer = styled.div`
   padding: 23px 12px 12px;
 
   position: relative;
-  overflow: scroll;
+  overflow-y: scroll;
 `;
 
 const Statement = styled.ul`

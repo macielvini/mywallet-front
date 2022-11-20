@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Logo from "../../components/Logo";
 import Form from "../../components/Form";
 import { useState } from "react";
-import { signIn } from "../../api/api";
+import { api, signIn } from "../../api/api";
 
 export default function SignIn() {
   const navigate = useNavigate();
@@ -19,11 +19,15 @@ export default function SignIn() {
 
   function formSignIn(e) {
     e.preventDefault();
+
     const body = form;
+
     signIn(body)
       .then((res) => {
         localStorage.setItem("name", res.data.name);
         localStorage.setItem("token", res.data.token);
+
+        api.defaults.headers["Authorization"] = `Bearer ${res.data.token}`;
         navigate("/home");
       })
       .catch((err) => console.log(err.response.data));
