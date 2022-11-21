@@ -30,7 +30,7 @@ export default function SignIn() {
         api.defaults.headers["Authorization"] = `Bearer ${res.data.token}`;
         navigate("/home");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => alert(err.response.data));
   }
 
   return (

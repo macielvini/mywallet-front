@@ -69,6 +69,7 @@ export default function Home() {
                   amount={item.amount}
                   type={item.type}
                   delItem={delItem}
+                  onClick={() => navigate("/register/edit")}
                 />
               ))}
         </Statement>

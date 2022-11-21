@@ -57,6 +57,11 @@ body {
 	font-family: 'Raleway', sans-serif;
 }
 
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
 a:hover {
 	cursor: pointer;
 }

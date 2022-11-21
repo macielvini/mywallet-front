@@ -22,6 +22,10 @@ export function addRecordToStatement(body) {
   return api.post("/statement", body);
 }
 
-export function deleteStatement(params) {
-  return api.delete(`/statement/${params}`);
+export function deleteStatement(id) {
+  return api.delete(`/statement/${id}`);
+}
+
+export function editStatement(id, body) {
+  return api.put(`/statement/${id}`, body);
 }
