@@ -22,7 +22,6 @@ export default function SignUp() {
   function formSignUp(e) {
     e.preventDefault();
     const body = form;
-    console.log(form);
     signUp(body)
       .then((res) => {
         navigate("/");
