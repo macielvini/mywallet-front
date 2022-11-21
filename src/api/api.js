@@ -21,3 +21,7 @@ export function getUserStatement() {
 export function addRecordToStatement(body) {
   return api.post("/statement", body);
 }
+
+export function deleteStatement(params) {
+  return api.delete(`/statement/${params}`);
+}

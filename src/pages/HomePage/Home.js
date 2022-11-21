@@ -1,11 +1,13 @@
-import styled from "styled-components";
-import logoutIcon from "../../assets/images/logout.svg";
-import PageTitle from "../../components/PageTitle";
 import { useEffect, useState } from "react";
+import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+
+import { getUserStatement, deleteStatement } from "../../api/api";
 import Footer from "./Footer";
 import Item from "./StatementItem";
-import { getUserStatement } from "../../api/api";
-import { useNavigate } from "react-router-dom";
+
+import PageTitle from "../../components/PageTitle";
+import logoutIcon from "../../assets/images/logout.svg";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -41,6 +43,12 @@ export default function Home() {
     navigate("/");
   }
 
+  function delItem(id) {
+    deleteStatement(id)
+      .then((res) => getStatement())
+      .catch((err) => console.log(err.response.data));
+  }
+
   return (
     <Container>
       <header>
@@ -55,10 +63,12 @@ export default function Home() {
             : statement.map((item) => (
                 <Item
                   key={item._id}
+                  id={item._id}
                   date={item.date}
                   description={item.description}
                   amount={item.amount}
                   type={item.type}
+                  delItem={delItem}
                 />
               ))}
         </Statement>
