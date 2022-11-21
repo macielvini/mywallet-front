@@ -38,7 +38,7 @@ export default function Transaction() {
       .then(() => {
         navigate("/home");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err?.response.data));
   }
 
   return (

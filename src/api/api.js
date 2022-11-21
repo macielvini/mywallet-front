@@ -19,6 +19,5 @@ export function getUserStatement() {
 }
 
 export function addRecordToStatement(body) {
-  console.log(TOKEN);
   return api.post("/statement", body);
 }

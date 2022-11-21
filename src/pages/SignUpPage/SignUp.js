@@ -27,7 +27,7 @@ export default function SignUp() {
       .then((res) => {
         navigate("/");
       })
-      .catch((err) => console.log(err.response.data));
+      .catch((err) => console.log(err?.response.data));
   }
 
   return (
